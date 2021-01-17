@@ -20,7 +20,6 @@ def add_pokemon(folium_map, lat, lon, image_url=DEFAULT_IMAGE_URL):
     )
     folium.Marker(
         [lat, lon],
-        # tooltip=name,  # disable tooltip because of folium encoding bug
         icon=icon,
     ).add_to(folium_map)
 
@@ -53,7 +52,7 @@ def show_all_pokemons(request):
 def show_pokemon(request, pokemon_id):
     try:
         requested_pokemon = Pokemon.objects.get(pk=pokemon_id)
-    except ObjectDoesNotExist:
+    except Pokemon.ObjectDoesNotExist:
         return HttpResponse("Покемон с заданным ID не найден")
 
     pokemon_entities = PokemonEntity.objects.filter(pokemon__id=pokemon_id)
