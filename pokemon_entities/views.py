@@ -52,7 +52,7 @@ def show_all_pokemons(request):
 def show_pokemon(request, pokemon_id):
     try:
         requested_pokemon = Pokemon.objects.get(pk=pokemon_id)
-    except Pokemon.ObjectDoesNotExist:
+    except Pokemon.DoesNotExist:
         return HttpResponse("Покемон с заданным ID не найден")
 
     pokemon_entities = requested_pokemon.entities.all()
